@@ -44,10 +44,22 @@ typedef struct SCOPE
 
 typedef struct MEMORY
 {
-    typedef void(*MEMORY_SINK());
-    typedef UNK (*MEMORY_WRITE)(const void* POINTER, UNK SIZE, UNK MEM_BANK, void* MEMORY_SINK); 
+    void* MEMORY_SINK();
+    UNK MEMORY_WRITE(const void* POINTER, UNK SIZE, UNK MEM_BANK, void* MEMORY_SINK);
+    char ERROR;
+    UNK SCOPE_SIZE;
 
 } MEMORY;
+
+void MEMORY_NULL_TERMINATE(const MEMORY);
+void MEMORY_BOOL(const MEMORY, int TYPE);
+void MEMORY_INT(const MEMORY*, ULONG* VARIABLE);
+void MEMORY_FLOAT(const MEMORY, ULONG* PRECISION);
+void MEMORY_STRING(const MEMORY, const char STRING, UNK* SIZE);
+void MEMORY_ELEMENT_START(MEMORY* MEMORY);
+void MEMORY_ELEMENT_END(MEMORY* MEMORY);
+void MEMORY_INDEX(MEMORY* MEMORY, UNK* POINTER);
+
 
 #endif
 

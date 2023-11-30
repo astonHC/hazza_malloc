@@ -18,6 +18,8 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
 
 #if defined(USE_HEAP)
 #define USE_HEAP
@@ -32,11 +34,15 @@
 #define     MEMORY_OVERFLOW                 2
 #define     MEMORY_UNDERFLOW                3
 #define     MEMORY_OUT_OF_SCOPE             4
-#define     MEMORY_DOUBLE_KEY               32   
+#define     MEMORY_DOUBLE_KEY               32
+
+#define     HEAP_MAX_BYTES                  64 * 1024
+#define     HEAP_MAX_WORD                   (HEAP_MAX_BYTES / assert(sizeof(*int)))
+#define     HEAP_MAX_CHUNK                  1024
 
 typedef struct SCOPE
 {
-    struct TYPE{};
+    union TYPE;
     S32* HEAD;
     S32* TAIL;
 
@@ -50,6 +56,21 @@ typedef struct MEMORY
     UNK SCOPE_SIZE;
 
 } MEMORY;
+
+typedef struct HEAP
+{
+    union CHUNK
+    {
+        int* START;
+        size_t* SIZE;
+
+    } CHUNK;
+
+    size_t* HEAP_BASE;
+    size_t* COUNT;
+    union CHUNK* CHUNK_AMOUNT[HEAP_MAX_CHUNK];
+
+} HEAP;
 
 void MEMORY_NULL_TERMINATE(const MEMORY);
 void MEMORY_BOOL(const MEMORY, int TYPE);

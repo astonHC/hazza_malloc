@@ -21,10 +21,10 @@
 #include <stdbool.h>
 #include <string.h>
 
-#if defined(USE_HEAP)
-#define USE_HEAP
+#if defined(USE_MEMORY)
+#define USE_MEMORY
 #else
-#define USE_HEAP
+#define USE_MEMORY
 
 #define     MEMORY_ARRAY                    0
 #define     MEMORY_OBJECT                   1
@@ -55,6 +55,13 @@ typedef struct MEMORY
 
 } MEMORY;
 
+#endif
+
+#if defined(USE_HEAP)
+#define USE_HEAP
+#else
+#define USE_HEAP
+
 typedef struct HEAP
 {
     int* START;
@@ -66,12 +73,16 @@ typedef struct HEAP
 
 typedef struct CHUNK
 {
+    bool REACH_CHUNKS[HEAP_MAX_CHUNK];
+    UNK* CHUNK_COUNT;
     CHUNK* CHUNK_AMOUNT[HEAP_MAX_CHUNK];
     CHUNK* ALLOCATED_CHUNKS;
     CHUNK* FREE_CHUNKS;
     CHUNK* TEMP_CHUNKS;
     
 } CHUNK; 
+
+
 
 void MEMORY_NULL_TERMINATE(const MEMORY);
 void MEMORY_BOOL(const MEMORY, int TYPE);
@@ -96,5 +107,4 @@ void CHUNK_LIST_FIND(const CHUNK* CHUNKS, UNK* POINTER);
 void CHUNK_LIST_REMOVE(const CHUNK* CHUNKS, UNK* INDEX);
 
 #endif
-
 #endif

@@ -16,3 +16,5 @@ This was a little something I wanted to make as per the CS1_CS module to be able
 # Documentation:
 
 [General Purpose Malloc guide](https://en.wikibooks.org/wiki/C_Programming/stdlib.h/malloc)
+
+[glibc malloc implementation](https://sourceware.org/glibc/wiki/MallocInternals)

@@ -78,7 +78,7 @@ void CHUNK_LIST_MERGE(CHUNK* DESITNATION, struct CHUNK* SOURCE)
 /* OF THE CORRESPONDENCE ABOVE TO ALLOCATE THE TYPES TO THE HEAP */
 
 STATIC
-void HEAP_ALLOC(UNK* SIZE)
+void* HEAP_ALLOC(UNK* SIZE)
 {
     struct HEAP* HEAP_BASE;
     struct CHUNK* CHUNK_BASE;
@@ -95,7 +95,25 @@ void HEAP_ALLOC(UNK* SIZE)
     if(HEAP_BASE->SIZE_BYTEWISE > 0)
     {
         CHUNK_LIST_MERGE(&CHUNK_BASE->TEMP_CHUNKS, &CHUNK_BASE->FREE_CHUNKS);
+        assert(CHUNK_BASE->FREE_CHUNKS = CHUNK_BASE->TEMP_CHUNKS);
+
+        for (UNK i = 0; i < CHUNK_BASE->FREE_CHUNKS; i++)
+        {
+            CHUNK_BASE += sizeof(CHUNK_BASE->CHUNK_AMOUNT[i]);
+
+            /* IF THE SIZE OF THE HEAP IS LARGER THAN THE QUANTITY OF */
+            /* OF THE BYTEWISE LENGTH OF THE ELEMENTS, NO ELEMENTS WILL PROCEED */
+
+            if(HEAP_BASE->SIZE >= sizeof(&HEAP_BASE->SIZE_BYTEWISE))
+            {
+                return NULL;
+            }
+        }
+
+        return HEAP_BASE->START;
     }
+
+    return NULL;
 }
 
 #endif

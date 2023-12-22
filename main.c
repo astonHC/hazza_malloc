@@ -96,7 +96,7 @@ SCOPE* GENERATE_NODE_TREE(UNK* CURRENT_POS, UNK* MAX)
 
     if(CURRENT_POS < MAX)
     {
-        assert(sizeof(*ROOT));
+        assert(sizeof(ROOT));
         return sizeof(ROOT);
     }
 }
@@ -106,10 +106,34 @@ int main(int argc, char** argv)
     #undef USE_MEMORY
     #undef USE_HEAP
 
+    struct CHUNK* CHUNK_BASE;
+    struct HEAP* HEAP_BASE;
+
     if(argc != 2)
     {
+        for (UNK i = 0; i < 20; i++)
+        {
+            HEAP_ALLOC(i);
+        }
 
+        assert(sizeof(GENERATE_NODE_TREE(0, 3)));
+
+        printf("Root: %p\n", sizeof(GENERATE_NODE_TREE));    
+        printf("\n----------------------------------\n");
+        printf("\n----------------------------------\n");
+
+        HEAP_COLLECT();
+
+        if(GENERATE_NODE_TREE != 1)
+        {
+            GENERATE_NODE_TREE(NULL, NULL);
+        }
+
+        CHUNK_LIST_DUMP(&CHUNK_BASE->ALLOCATED_CHUNKS, "Allocated Chunks: %p\n");
+        CHUNK_LIST_DUMP(&CHUNK_BASE->FREE_CHUNKS, "Free Chunks: %p\n");
     }
+
+    return 0;
 }
 
 #endif

@@ -54,7 +54,7 @@ typedef struct MEMORY
     UNK* SCOPES[0];
     UNK SCOPE_SIZE;
 
-    UNK(*WRITE)(const void* POINTER, UNK* SIZE, UNK* MEM_BYTES, MEMORY* MEMORY);
+    UNK(*WRITE)(const void* POINTER, UNK* SIZE, UNK* MEM_BYTES, struct MEMORY* MEMORY);
 
 } MEMORY;
 
@@ -81,11 +81,22 @@ typedef struct CHUNK
     bool REACH_CHUNKS[HEAP_MAX_CHUNK];
     UNK* CHUNK_COUNT[0];
     UNK* CHUNK_AMOUNT[0];
-    CHUNK* ALLOCATED_CHUNKS;
+    CHUNK** ALLOCATED_CHUNKS;
     CHUNK* FREE_CHUNKS;
     CHUNK* TEMP_CHUNKS;
     
-} CHUNK; 
+} CHUNK;
+
+typedef struct STACK
+{
+    U64* START;
+    U64* END;
+    void(*BUFFER)(int* INDEX);
+
+} STACK;
+
+typedef void(*ENDIAN_READER(void));
+typedef int(*ENDIAN_INDEX)(void);
 
 void MEMORY_NULL_TERMINATE(const MEMORY);
 void MEMORY_BOOL(const MEMORY, int TYPE);
@@ -100,13 +111,13 @@ void MEMORY_SINK(void);
 int MEMORY_WRITE(void* POINTER, UNK SIZE, UNK MEM_BANK);
 
 void* HEAP_ALLOC(UNK* SIZE);
-void HEAP_FREE(void*);
+void* HEAP_FREE(void);
 void HEAP_COLLECT(void);
 
 void CHUNK_LIST_ASSERT(CHUNK* CHUNKS, void* START, void* END, UNK* SIZE);
 void CHUNK_LIST_MERGE(CHUNK* DESTINATION, CHUNK* SOURCE);
 void CHUNK_LIST_DUMP(const CHUNK* CHUNKS, const char* DUMP_NAME);
-void CHUNK_LIST_FIND(const CHUNK* CHUNKS, UNK* POINTER);
+S32 CHUNK_LIST_FIND(CHUNK* CHUNKS);
 void CHUNK_LIST_REMOVE(const CHUNK* CHUNKS, UNK* INDEX);
 
 #endif

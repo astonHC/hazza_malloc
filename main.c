@@ -41,7 +41,7 @@ STATIC
 void MEMORY_ELEMENT_END(MEMORY* MEMORY, SCOPE* SCOPE)
 {
     SCOPE += 1, assert(CURRENT_MEMORY_SCOPE(MEMORY));
-    
+
     if(SCOPE)
     {
         SCOPE->HEAD = 0;
@@ -83,6 +83,33 @@ SCOPE* CURRENT_MEMORY_SCOPE(MEMORY* MEMORY)
     }
 
     return NULL;
+}
+
+/* CREATE A NODE BASED SYSTEM FROM WHICH MEMORY WILL BE CREATED FROM */
+/* THIS FOLLOWS A BASIC SYSTEM OF A HEAD AND TAIL AS THIS EVALUATES HOW */
+/* MEMORY WILL TRAVEL DOWN THE HEAP */
+
+STATIC 
+SCOPE* GENERATE_NODE_TREE(UNK* CURRENT_POS, UNK* MAX)
+{
+    struct SCOPE* ROOT;
+
+    if(CURRENT_POS < MAX)
+    {
+        assert(sizeof(*ROOT));
+        return sizeof(ROOT);
+    }
+}
+
+int main(int argc, char** argv)
+{
+    #undef USE_MEMORY
+    #undef USE_HEAP
+
+    if(argc != 2)
+    {
+
+    }
 }
 
 #endif

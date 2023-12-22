@@ -1,15 +1,11 @@
-PREFIX = /usr/local
 CC = gcc
-SRCS = *.c
-TARGET = $(basename $(firstword $(SRCS)))
+SRCS = main.c heap.c
+TARGET = hazza_malloc
 
 all: $(TARGET)
 
 $(TARGET): $(SRCS)
-    $(CC) -o $@ $^
-
-install: $(TARGET)
-    cp $(TARGET) $(PREFIX)/bin
+	$(CC) -o $@ $^
 
 clean:
-    rm -f $(TARGET)
+	rm -f $(TARGET)

@@ -42,7 +42,7 @@
 
 typedef struct SCOPE
 {
-    union TYPE;
+    void(*TYPE);
     S32* HEAD;
     S32* TAIL;
 
@@ -81,9 +81,9 @@ typedef struct CHUNK
     bool REACH_CHUNKS[HEAP_MAX_CHUNK];
     UNK* CHUNK_COUNT[0];
     UNK* CHUNK_AMOUNT[0];
-    CHUNK** ALLOCATED_CHUNKS;
-    CHUNK* FREE_CHUNKS;
-    CHUNK* TEMP_CHUNKS;
+    void(*ALLOCATED_CHUNKS);
+    void(*FREE_CHUNKS);
+    void(*TEMP_CHUNKS);
     
 } CHUNK;
 

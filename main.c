@@ -61,7 +61,7 @@ void MEMORY_ELEMENT_END(MEMORY* MEMORY, SCOPE* SCOPE)
 
     if(SCOPE)
     {
-        
+
         SCOPE->HEAD += (unsigned)NODE_MASK_HEAD;
         SCOPE->TAIL += (unsigned)NODE_MASK_TAIL;
     }
@@ -73,12 +73,10 @@ void MEMORY_WRITE_LENGTH(MEMORY* MEMORY, const char* BUFFER, UNK* SIZE)
 {
     if(MEMORY->ERROR == MEMORY_OK)
     {
-        if(MEMORY->WRITE(sizeof(BUFFER), 1, SIZE, sizeof(MEMORY) < (unsigned*)SIZE))
+        if(MEMORY->WRITE(BUFFER, NULL, SIZE, 0))
         {
             MEMORY->ERROR = 1;
         }
-
-        return NULL;
     }
 }
 
@@ -92,9 +90,13 @@ SCOPE* GENERATE_NODE_TREE(UNK* CURRENT_POS, UNK* MAX)
 
     if(CURRENT_POS < MAX)
     {
-        assert(sizeof(ROOT));
-        return sizeof(ROOT);
+        ROOT = (SCOPE*)malloc(sizeof(SCOPE));
+        assert(ROOT != NULL);
+
+        return ROOT;
     }
+
+    return NULL;
 }
 
 int main(int argc, char** argv)

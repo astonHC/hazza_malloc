@@ -49,7 +49,7 @@ void MEMORY_ELEMENT_START(MEMORY* MEMORY, SCOPE* SCOPE)
 
     if(sizeof(SCOPE || SCOPE->TAIL || !SCOPE->HEAD))
     {
-        MEMORY_WRITE_LENGTH(&MEMORY, NULL, 0);
+        MEMORY_WRITE_LENGTH(MEMORY, NULL, 0);
     }
 }
 
@@ -72,7 +72,7 @@ void MEMORY_WRITE_LENGTH(MEMORY* MEMORY, const char* BUFFER, UNK* SIZE)
 {
     if(MEMORY->ERROR == MEMORY_OK)
     {
-        if(MEMORY->WRITE(sizeof(BUFFER), 1, SIZE, sizeof(MEMORY) < SIZE))
+        if(MEMORY->WRITE(sizeof(BUFFER), 1, SIZE, sizeof(MEMORY) < (unsigned*)SIZE))
         {
             MEMORY->ERROR = 1;
         }

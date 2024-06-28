@@ -84,7 +84,7 @@ void MEMORY_WRITE_LENGTH(MEMORY* MEMORY, const char* BUFFER, UNK* SIZE)
 /* THIS FOLLOWS A BASIC SYSTEM OF A HEAD AND TAIL AS THIS EVALUATES HOW */
 /* MEMORY WILL TRAVEL DOWN THE HEAP */
 
-SCOPE* GENERATE_NODE_TREE(UNK* CURRENT_POS, UNK* MAX)
+SCOPE* GENERATE_NODE_TREE(int CURRENT_POS, int MAX)
 {
     struct SCOPE* ROOT;
 
@@ -114,10 +114,10 @@ int main(int argc, char** argv)
     {
         for (UNK i = 0; i < 20; i++)
         {
-            HEAP_ALLOC(i);
+            HEAP_ALLOC(&i);
         }
 
-        assert(sizeof(GENERATE_NODE_TREE(0, 3)));
+        SCOPE* RESULT = GENERATE_NODE_TREE(NODE_TREE_POS, NODE_TREE_MAX);
 
         printf("Root: %p\n", sizeof(GENERATE_NODE_TREE));    
         printf("\n----------------------------------\n");
@@ -128,9 +128,10 @@ int main(int argc, char** argv)
         /* THIS IS ASSUMING THAT THERE IS NOTHING TO DISPLAY */
         /* IN THAT THE NODES HAVE FINISHED GENERATING */
 
-        if(GENERATE_NODE_TREE != 1)
+        if(RESULT == NULL)
         {
-            GENERATE_NODE_TREE(NULL, NULL);
+            GENERATE_NODE_TREE(0, 0);
+            free(&RESULT);
         }
 
         CHUNK_LIST_DUMP(&CHUNK_BASE->ALLOCATED_CHUNKS, "Allocated Chunks: %p\n");

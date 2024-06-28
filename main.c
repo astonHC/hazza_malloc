@@ -61,8 +61,9 @@ void MEMORY_ELEMENT_END(MEMORY* MEMORY, SCOPE* SCOPE)
 
     if(SCOPE)
     {
-        SCOPE->HEAD = 0x00;
-        SCOPE->TAIL = 0x01;
+        
+        SCOPE->HEAD += (unsigned)NODE_MASK_HEAD;
+        SCOPE->TAIL += (unsigned)NODE_MASK_TAIL;
     }
 }
 

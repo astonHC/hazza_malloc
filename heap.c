@@ -55,7 +55,7 @@ void CHUNK_LIST_MERGE(struct CHUNK* DESITNATION, struct CHUNK* SOURCE)
     /* WHEREBY FOR EVERY NTH ELEMENT, THE CHUNK AMOUNT GOES FURTHER */
     /* DOWN INTO THE HEAP */
 
-    for (UNK i = 0; i < SOURCE->CHUNK_COUNT; i++)
+    for (UNK i = 0; i < *(unsigned*)SOURCE->CHUNK_COUNT; i++)
     {
         CHUNK* CHUNK_AMOUNT = SOURCE->CHUNK_COUNT[i];
 

@@ -1,12 +1,6 @@
 # hazza_malloc
 Recreational Malloc System created as per the CS1_CS module
 
-# NOTICE:
-
-I wanted to fork this repository in particular from my University account to show off one of my best works.
-
-This is all in relation towards the area of expertise I wish to showcase in industry
-
 # Motive:
 
 This project serves to provide a base of which Memory Management Systems work inside of an Operating System

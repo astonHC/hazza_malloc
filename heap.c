@@ -57,11 +57,11 @@ void CHUNK_LIST_MERGE(struct CHUNK* DESITNATION, struct CHUNK* SOURCE)
 
     for (UNK i = 0; i < *(unsigned*)SOURCE->CHUNK_COUNT; i++)
     {
-        CHUNK* CHUNK_AMOUNT = SOURCE->CHUNK_COUNT[i];
+        CHUNK* CHUNK_AMOUNT = (CHUNK*)SOURCE->CHUNK_COUNT[i];
 
         if(DESITNATION->CHUNK_COUNT > 0)
         {
-           CHUNK* TOP_AMOUNT = &DESITNATION->CHUNK_AMOUNT[i - 1];
+           CHUNK* TOP_AMOUNT = (CHUNK*)DESITNATION->CHUNK_AMOUNT[i - 1];
         }
 
         /* IF THE CORRESPONDENCE DOESN'T EXIST IN THE STACK */
@@ -84,11 +84,11 @@ S32 CHUNK_LIST_FIND(struct CHUNK* CHUNK_BASE)
     ENDIAN_READER* READER;
     ENDIAN_INDEX* INDEX;
 
-    for (UNK i = 0; i < CHUNK_BASE->CHUNK_COUNT; i++)
+    for (UNK i = 0; i < *(UNK*)CHUNK_BASE->CHUNK_COUNT; i++)
     {
         if(CHUNK_BASE->ALLOCATED_CHUNKS[i] += sizeof(READER))
         {
-            return (int*)INDEX;
+            return *(int*)INDEX;
         }
     }
 

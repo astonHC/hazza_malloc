@@ -10,6 +10,7 @@
 
 /* NESTED INCLUDES */
 
+
 #include "util.h"
 
 #ifdef USE_MEMORY
@@ -104,7 +105,7 @@ int main(int argc, char** argv)
     #undef USE_MEMORY
     #undef USE_HEAP
 
-    struct CHUNK* CHUNK_BASE;
+    struct CHUNK* CHUNK_BASE = malloc(sizeof(CHUNK));
     struct HEAP* HEAP_BASE;
 
     /* GIVEN THE ENTRY CODE, CREATE THE HEAP */
@@ -131,11 +132,11 @@ int main(int argc, char** argv)
         if(RESULT == NULL)
         {
             GENERATE_NODE_TREE(0, 0);
-            free(&RESULT);
+            free(RESULT);
         }
 
-        CHUNK_LIST_DUMP(&CHUNK_BASE->ALLOCATED_CHUNKS, "Allocated Chunks: %p\n");
-        CHUNK_LIST_DUMP(&CHUNK_BASE->FREE_CHUNKS, "Free Chunks: %p\n");
+        CHUNK_BASE->ALLOCATED_CHUNKS, "Allocated Chunks: %p\n";
+        CHUNK_BASE->FREE_CHUNKS, "Free Chunks: %p\n";
     }
 
     return 0;

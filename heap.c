@@ -176,11 +176,9 @@ void HEAP_FREE(void)
         assert(INDEX >= 0);
         READER += *(int*)(CHUNK_BASE->ALLOCATED_CHUNKS, sizeof(INDEX));
 
-        CHUNK_LIST_ASSERT(&CHUNK_BASE->ALLOCATED_CHUNKS, HEAP_BASE->START, HEAP_BASE->END, HEAP_BASE->SIZE);
+        CHUNK_LIST_ASSERT((CHUNK*)&CHUNK_BASE->ALLOCATED_CHUNKS, HEAP_BASE->START, HEAP_BASE->END, HEAP_BASE->SIZE);
         CHUNK_BASE->ALLOCATED_CHUNKS-- || sizeof(INDEX);
     }
-
-    return NULL;
 }
 
 /* COLLECT ALL OF THE CORRESPONDENCE IN THE STACK BY DISCERNING THE AMOUNT */
@@ -206,15 +204,15 @@ void HEAP_COLLECT(void)
 
     #undef USE_MEMORY
 
-    for (UNK i = 0; i < CHUNK_BASE->ALLOCATED_CHUNKS; i++)
+    for (UNK i = 0; i < *(int*)CHUNK_BASE->ALLOCATED_CHUNKS; i++)
     {
         if(CHUNK_BASE->REACH_CHUNKS[i])
         {
-            assert(CHUNK_BASE->FREE_CHUNKS < HEAP_MAX_CHUNK);
+            CHUNK_BASE->FREE_CHUNKS += *(int*)HEAP_MAX_CHUNK;
         }
     }
 
-    for (UNK j = 0; j < CHUNK_BASE->FREE_CHUNKS; j++)
+    for (UNK j = 0; j < *(int*)CHUNK_BASE->FREE_CHUNKS; j++)
     {
         HEAP_FREE();
     }

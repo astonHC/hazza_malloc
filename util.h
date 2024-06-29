@@ -40,6 +40,12 @@
 #define     HEAP_MAX_WORD                   (HEAP_MAX_BYTES / assert(sizeof(*int)))
 #define     HEAP_MAX_CHUNK                  1024
 
+#define     NODE_MASK_HEAD                  0x00
+#define     NODE_MASK_TAIL                  0x01
+
+#define     NODE_TREE_POS                   0
+#define     NODE_TREE_MAX                   3
+
 typedef struct SCOPE
 {
     void(*TYPE);
@@ -81,7 +87,7 @@ typedef struct CHUNK
     bool REACH_CHUNKS[HEAP_MAX_CHUNK];
     UNK* CHUNK_COUNT[0];
     UNK* CHUNK_AMOUNT[0];
-    void(*ALLOCATED_CHUNKS);
+    int* ALLOCATED_CHUNKS;
     void(*FREE_CHUNKS);
     void(*TEMP_CHUNKS);
     
@@ -110,15 +116,15 @@ void MEMORY_WRITE_LENGTH(MEMORY* MEMORY, const char* BUFFER, UNK* SIZE);
 void MEMORY_SINK(void);
 int MEMORY_WRITE(void* POINTER, UNK SIZE, UNK MEM_BANK);
 
-void* HEAP_ALLOC(UNK* SIZE);
-void* HEAP_FREE(void);
+int HEAP_ALLOC(UNK* SIZE);
+void HEAP_FREE(void);
 void HEAP_COLLECT(void);
 
 void CHUNK_LIST_ASSERT(CHUNK* CHUNKS, void* START, void* END, UNK* SIZE);
 void CHUNK_LIST_MERGE(CHUNK* DESTINATION, CHUNK* SOURCE);
-void CHUNK_LIST_DUMP(const CHUNK* CHUNKS, const char* DUMP_NAME);
+void CHUNK_LIST_DUMP(int* CHUNKS, const char* DUMP_NAME);
 S32 CHUNK_LIST_FIND(CHUNK* CHUNKS);
-void CHUNK_LIST_REMOVE(const CHUNK* CHUNKS, UNK* INDEX);
+void CHUNK_LIST_REMOVE(CHUNK* CHUNKS, UNK* INDEX);
 
 #endif
 #endif

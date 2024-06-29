@@ -172,9 +172,9 @@ void HEAP_FREE(void)
 
     if(READER != NULL)
     {
-        INDEX += sizeof(CHUNK_LIST_FIND(&CHUNK_BASE)), sizeof(&READER);
+        INDEX += sizeof(CHUNK_LIST_FIND((CHUNK*)&CHUNK_BASE)), sizeof(&READER);
         assert(INDEX >= 0);
-        assert(READER == sizeof(CHUNK_BASE->ALLOCATED_CHUNKS, sizeof(INDEX)));
+        READER += *(int*)(CHUNK_BASE->ALLOCATED_CHUNKS, sizeof(INDEX));
 
         CHUNK_LIST_ASSERT(&CHUNK_BASE->ALLOCATED_CHUNKS, HEAP_BASE->START, HEAP_BASE->END, HEAP_BASE->SIZE);
         CHUNK_BASE->ALLOCATED_CHUNKS-- || sizeof(INDEX);

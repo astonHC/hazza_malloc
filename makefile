@@ -1,6 +1,6 @@
 CC = gcc
 SRCS = main.c heap.c
-TARGET = hazza_malloc
+TARGET = hmalloc
 
 all: $(TARGET)
 

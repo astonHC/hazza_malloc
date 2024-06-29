@@ -111,8 +111,6 @@ int main(int argc, char** argv)
     /* GIVEN THE ENTRY CODE, CREATE THE HEAP */
     /* WITH AN ARBITARY VALUE */
 
-    if(argc != 2)
-    {
         for (UNK i = 0; i < 20; i++)
         {
             HEAP_ALLOC(&i);
@@ -137,9 +135,8 @@ int main(int argc, char** argv)
 
         CHUNK_BASE->ALLOCATED_CHUNKS, "Allocated Chunks: %p\n";
         CHUNK_BASE->FREE_CHUNKS, "Free Chunks: %p\n";
-    }
 
-    return 0;
+        return 0;
 }
 
 #endif

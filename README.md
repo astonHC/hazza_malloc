@@ -13,6 +13,10 @@ This was a little something I wanted to make as per the CS1_CS module to be able
 
 ``run the makefile using make (run as sudo if necessary)``
 
+``make``
+
+``./hmalloc``
+
 # Documentation:
 
 [General Purpose Malloc guide](https://en.wikibooks.org/wiki/C_Programming/stdlib.h/malloc)
